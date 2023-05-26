@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Piller } from './components/piller'
 
 function App() {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -28,22 +29,10 @@ function App() {
   return (
     <div className="flex flex-col w-screen h-screen">
       <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
-        <div className="border-2 border-emerald-200 w-6 h-24  bg-emerald-300">
-          <div className="w-6 h-12 bg-black">
-          </div>
-        </div>
-        <div className="border-2 border-rose-200 w-6 h-24 bg-rose-300">
-          <div className="w-6 h-12 bg-black">
-          </div>
-        </div>
-        <div className="border-2 border-yellow-200 w-6 h-24  bg-yellow-300">
-          <div className="w-6 h-12 bg-black">
-          </div>
-        </div>
-        <div className="border-2 border-violet-200 w-6 h-24  bg-violet-300">
-          <div className="w-6 h-12 bg-black">
-          </div>
-        </div>
+        <Piller color="emerald" score={30} />
+        <Piller color="rose" score={30} />
+        <Piller color="yellow" score={30} />
+        <Piller color="violet" score={30} />
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
         <button onMouseEnter={() => handleMouseEnter(false)}
