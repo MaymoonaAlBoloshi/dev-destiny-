@@ -15,9 +15,17 @@ function App() {
     if (cardRef.current) {
       cardRef.current.style.transform = 'rotate(0deg)';
       cardRef.current.style.boxShadow = 'none';
+      cardRef.current.style.opacity = '1';
     }
   };
 
+
+  const handleClick = () => {
+    if (cardRef.current) {
+      cardRef.current.style.opacity = '0.2';
+      cardRef.current.style.transform = 'scale(0.8)';
+    }
+  }
   return (
     <div className="flex flex-col w-screen h-screen">
       <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
@@ -40,6 +48,7 @@ function App() {
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
         <button onMouseEnter={() => handleMouseEnter(false)}
+          onClick={handleClick}
           onMouseLeave={handleMouseLeave}
           className="border-2 border-rose-600 px-2 text-rose-300 h-8">
           decline
@@ -55,6 +64,7 @@ function App() {
           </p>
         </div>
         <button onMouseEnter={() => handleMouseEnter(true)}
+          onClick={handleClick}
           onMouseLeave={handleMouseLeave}
           className="border-2 border-emerald-600 px-2 text-emerald-300 h-8 ">
           Accept
