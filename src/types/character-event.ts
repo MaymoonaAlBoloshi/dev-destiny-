@@ -1,13 +1,19 @@
+import { CharacterType } from './character'
+import { PillerType } from './pillers'
+
 export type CharacterEvent = {
-  characterId: number;
-  events: {
-    id: number;
-    event: string;
-    effects: Effects[];
-  }
+  character: keyof typeof CharacterType;
+  events: Event[];
+};
+
+type Event = {
+  id: number;
+  event: string;
+  AcceptEffects: Effects[];
+  RejectEffects: Effects[];
 };
 
 type Effects = {
-  pillerId: number;
+  pillerName: keyof typeof PillerType;
   effect: number; // postive or negative number
 };

@@ -1,8 +1,12 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Piller } from './components/piller'
 
 function App() {
   const cardRef = useRef<HTMLDivElement>(null)
+  const [employeesScore, setEmployeesScore] = useState(50)
+  const [customersScore, setCustomersScore] = useState(50)
+  const [investorsScore, setInvestorsScore] = useState(50)
+  const [competetorsScore, setCompetetorsScore] = useState(50)
 
   const handleMouseEnter = (isRight: boolean) => {
     if (cardRef.current) {
@@ -29,10 +33,10 @@ function App() {
   return (
     <div className="flex flex-col w-screen h-screen">
       <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
-        <Piller color="emerald" score={30} />
-        <Piller color="rose" score={30} />
-        <Piller color="yellow" score={30} />
-        <Piller color="violet" score={30} />
+        <Piller color="emerald" score={employeesScore} />
+        <Piller color="rose" score={investorsScore} />
+        <Piller color="yellow" score={competetorsScore} />
+        <Piller color="violet" score={customersScore} />
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
         <button onMouseEnter={() => handleMouseEnter(false)}
@@ -63,6 +67,5 @@ function App() {
 }
 
 export default App
-//TODO: add pillers object
 //TODO: add audio button with icon
 //TODO: add character events
