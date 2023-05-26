@@ -2,8 +2,23 @@ function App() {
 
   return (
     <div className="flex flex-col w-screen h-screen">
-      <header className="basis-1/12 bg-black text-white text-md p-4">
-        header
+      <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
+        <div className="border-2 border-emerald-200 w-6 h-24  bg-emerald-300">
+          <div className="w-6 h-12 bg-black">
+          </div>
+        </div>
+        <div className="border-2 border-rose-200 w-6 h-24 bg-rose-300">
+          <div className="w-6 h-12 bg-black">
+          </div>
+        </div>
+        <div className="border-2 border-yellow-200 w-6 h-24  bg-yellow-300">
+          <div className="w-6 h-12 bg-black">
+          </div>
+        </div>
+        <div className="border-2 border-violet-200 w-6 h-24  bg-violet-300">
+          <div className="w-6 h-12 bg-black">
+          </div>
+        </div>
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
         <button className="border-2 border-rose-600 px-2 text-rose-300 h-8">
