@@ -1,4 +1,22 @@
+import { useRef } from 'react'
+
 function App() {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const handleMouseEnter = (isRight: boolean) => {
+    if (cardRef.current) {
+      cardRef.current.style.transform = isRight ? 'rotate(25deg)' : 'rotate(-25deg)';
+      // add a shadow on card #991b1b or #065f46
+      cardRef.current.style.boxShadow = isRight ? '0 0 40px #059669' : '0 0 40px #991b1b';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (cardRef.current) {
+      cardRef.current.style.transform = 'rotate(0deg)';
+      cardRef.current.style.boxShadow = 'none';
+    }
+  };
 
   return (
     <div className="flex flex-col w-screen h-screen">
@@ -21,10 +39,12 @@ function App() {
         </div>
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
-        <button className="border-2 border-rose-600 px-2 text-rose-300 h-8">
+        <button onMouseEnter={() => handleMouseEnter(false)}
+          onMouseLeave={handleMouseLeave}
+          className="border-2 border-rose-600 px-2 text-rose-300 h-8">
           decline
         </button>
-        <div className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-white">
+        <div ref={cardRef} className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-yellow-50 transition-all duration-700">
           <p className="text-yellow-200 w-full p-4 text-center">Character</p>
           <img className="w-36" src="https://via.placeholder.com/64" alt="character" />
           <p className="italic text-sm text-center text-yellow-50">
@@ -34,8 +54,10 @@ function App() {
             <span className="text-yellow-200 text-2xl m-b-2">"</span>
           </p>
         </div>
-        <button className="border-2 border-emerald-600 px-2 text-emerald-300 h-8 ">
-          decline
+        <button onMouseEnter={() => handleMouseEnter(true)}
+          onMouseLeave={handleMouseLeave}
+          className="border-2 border-emerald-600 px-2 text-emerald-300 h-8 ">
+          Accept
         </button>
       </main>
     </div>
