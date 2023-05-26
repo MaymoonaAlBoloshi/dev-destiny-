@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Piller } from '../components/piller'
 import { CMOEvents } from '../data/cmo-events'
 import { CTOEvents } from '../data/cto-events'
-import { CharacterEvent } from '../types/character-event.ts'
+import { CharacterEvent, Event } from '../types/character-event.ts'
+import { PillerType } from '../types/pillers.ts'
+
 
 const eventsLength = (eventList: any) => eventList.events.length
 
@@ -13,7 +15,7 @@ function Game() {
   const [investorsScore, setInvestorsScore] = useState(50)
   const [competetorsScore, setCompetetorsScore] = useState(50)
   const [randomCharacter, setRandomCharacter] = useState(1)
-  const [randomEvent, setRandomEvent] = useState(0)
+  const [randomEvent, setRandomEvent] = useState<Event>()
 
   const [eventList, setEventList] = useState<CharacterEvent>(CTOEvents)
 
@@ -46,13 +48,50 @@ function Game() {
   };
 
 
-  const handleClick = () => {
+  const cardAnimate = () => {
     if (cardRef.current) {
       cardRef.current.style.opacity = '0.2';
       cardRef.current.style.transform = 'scale(0.8)';
     }
-    // generate radome event
   }
+
+  const pillerScoreUpate = (score: number, pillerName: PillerType) => {
+    switch (pillerName) {
+      case PillerType.EMPLOYEE:
+        setEmployeesScore(employeesScore + score)
+        break;
+      case PillerType.CUSTOMER:
+        setCustomersScore(customersScore + score)
+        break;
+      case PillerType.INVESTOR:
+        setInvestorsScore(investorsScore + score)
+        break;
+      case PillerType.COMPETITOR:
+        setCompetetorsScore(competetorsScore + score)
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handleAccept = () => {
+    cardAnimate()
+    const effects = randomEvent?.AcceptEffects || []
+    effects.forEach((effect) => {
+      pillerScoreUpate(effect.effect, effect.pillerName as PillerType)
+    })
+    return true
+  }
+
+  const hadleDecline = () => {
+    cardAnimate()
+    const effects = randomEvent?.RejectEffects || []
+    effects.forEach((effect) => {
+      pillerScoreUpate(effect.effect, effect.pillerName as PillerType)
+    })
+    return true
+  }
+
   useEffect(() => {
     const random = Math.floor(Math.random() * 2) + 1
     setRandomCharacter(random)
@@ -64,17 +103,12 @@ function Game() {
 
   useEffect(() => {
     if (eventList) {
-      const rand = Math.floor(Math.random() * eventsLength(eventList)) + 1
-      setRandomEvent(rand)
+      const rand = Math.floor(Math.random() * eventsLength(eventList))
+      setRandomEvent(eventList.events[rand])
     }
   }, [eventList])
 
 
-
-
-  randomEvent && console.log(eventList.events[randomEvent])
-
-  if (!eventList) return <div> event not found </div>
   return (
     <div className="flex flex-col w-screen h-screen">
       <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
@@ -85,7 +119,7 @@ function Game() {
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
         <button onMouseEnter={() => handleMouseEnter(false)}
-          onClick={handleClick}
+          onClick={hadleDecline}
           onMouseLeave={handleMouseLeave}
           className="border-2 border-rose-600 px-2 text-rose-300 py-1 hover:px-3 duration-700 hover:py-2">
           decline
@@ -95,12 +129,12 @@ function Game() {
           <img className="w-36" src="https://via.placeholder.com/64" alt="character" />
           <p className="italic text-sm text-center text-yellow-50 px-2">
             <span className="text-yellow-200 text-2xl abosolute">"</span>
-            {randomEvent && eventList.events[randomEvent].event}
+            {randomEvent && randomEvent.event}
             <span className="text-yellow-200 text-2xl m-b-2 abosolute">"</span>
           </p>
         </div>
         <button onMouseEnter={() => handleMouseEnter(true)}
-          onClick={handleClick}
+          onClick={handleAccept}
           onMouseLeave={handleMouseLeave}
           className="border-2 border-emerald-600 px-2 text-emerald-300  py-1 hover:px-3 duration-700 hover:py-2">
           Accept
