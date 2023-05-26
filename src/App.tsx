@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="flex flex-col w-screen h-screen">
+      <header className="basis-1/12 bg-black text-white text-md p-4">
+        header
+      </header>
+      <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
+        <button className="border-2 border-rose-600 px-2 text-rose-300 h-8">
+          decline
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+        <div className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-white">
+          <p className="text-yellow-200 w-full p-4 text-center">Character</p>
+          <img className="w-36" src="https://via.placeholder.com/64" alt="character" />
+          <p className="italic text-sm text-center text-yellow-50">
+            <span className="text-yellow-200 text-2xl">"</span>
+            lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+            <span className="text-yellow-200 text-2xl m-b-2">"</span>
+          </p>
+        </div>
+        <button className="border-2 border-emerald-600 px-2 text-emerald-300 h-8 ">
+          decline
+        </button>
+      </main>
+    </div>
   )
 }
 
