@@ -2,116 +2,93 @@ import { CharacterEvent } from "../types//character-event";
 import { CharacterType } from "../types/character";
 import { PillerType } from "../types/pillers";
 
-export const CTOEvents: CharacterEvent = {
-  character: CharacterType.CTO,
+
+export const CMOEvents: CharacterEvent = {
+  character: CharacterType.CMO,
   events: [
     {
       id: 1,
-      event: "Our tech stack is outdated. Should we invest in updating it?",
+      event: "Our social media presence is lacking. Should we invest more in our online marketing?",
       AcceptEffects: [
         {
-          pillerName: PillerType.EMPLOYEE,
-          effect: 3 // modern tech stack can boost employee morale and productivity
+          pillerName: PillerType.CUSTOMER,
+          effect: 3 // greater online presence can attract more customers
         },
         {
           pillerName: PillerType.INVESTOR,
-          effect: -3 // substantial investment might worry investors
+          effect: -2 // more marketing expenses might concern investors
         },
         {
           pillerName: PillerType.COMPETITOR,
-          effect: 2 // staying updated with tech gives a competitive edge
+          effect: 2 // strong online presence can give a competitive edge
         }
       ],
       RejectEffects: [
         {
-          pillerName: PillerType.EMPLOYEE,
-          effect: -2 // outdated tech can frustrate employees
+          pillerName: PillerType.CUSTOMER,
+          effect: -2 // weak online presence can result in losing potential customers
         },
         {
           pillerName: PillerType.COMPETITOR,
-          effect: -2 // you lose competitive edge with outdated tech
+          effect: -2 // competitors with stronger online presence might get ahead
         }
       ]
     },
     {
       id: 2,
-      event: "We have a chance to hire a highly skilled but expensive developer. Should we go for it?",
+      event: "We have an opportunity to sponsor a major event. Should we go for it?",
       AcceptEffects: [
         {
-          pillerName: PillerType.EMPLOYEE,
-          effect: 2 // high-skilled peer can boost overall team skill and morale
+          pillerName: PillerType.CUSTOMER,
+          effect: 3 // sponsoring events can increase brand visibility and attract more customers
         },
         {
           pillerName: PillerType.INVESTOR,
-          effect: -4 // substantial salary expense might worry investors
+          effect: -3 // the high cost of sponsorship might worry investors
+        },
+        {
+          pillerName: PillerType.COMPETITOR,
+          effect: 1 // sponsorship can give a competitive edge
         }
       ],
       RejectEffects: [
         {
-          pillerName: PillerType.EMPLOYEE,
-          effect: -1 // missed opportunity can lead to questions about commitment to quality
+          pillerName: PillerType.CUSTOMER,
+          effect: -1 // missed sponsorship opportunity can lead to less visibility
         },
         {
           pillerName: PillerType.COMPETITOR,
-          effect: -1 // missed hiring could lead to a competitive disadvantage
+          effect: -1 // competitors might take the opportunity and get ahead
         }
       ]
     },
     {
       id: 3,
-      event: "A team member suggests using an experimental technology in our project. Should we take the risk?",
-      AcceptEffects: [
-        {
-          pillerName: PillerType.EMPLOYEE,
-          effect: 2 // engaging with experimental tech can boost morale and innovation
-        },
-        {
-          pillerName: PillerType.INVESTOR,
-          effect: -3 // risky decision might worry investors
-        },
-        {
-          pillerName: PillerType.COMPETITOR,
-          effect: 1 // if successful, this risk could give a competitive edge
-        }
-      ],
-      RejectEffects: [
-        {
-          pillerName: PillerType.EMPLOYEE,
-          effect: -2 // rejecting innovative ideas may demotivate employees
-        },
-        {
-          pillerName: PillerType.COMPETITOR,
-          effect: -1 // rejecting could lead to a missed opportunity to get ahead of competition
-        }
-      ]
-    },
-    {
-      id: 4,
-      event: "There's a major bug in our product. Should we delay the launch to fix it?",
+      event: "Our competitor launched a negative ad campaign against us. Should we retaliate with our own campaign?",
       AcceptEffects: [
         {
           pillerName: PillerType.CUSTOMER,
-          effect: 3 // delivering a bug-free product increases customer satisfaction
+          effect: 1 // defending the company might retain some customers
         },
         {
           pillerName: PillerType.INVESTOR,
-          effect: -3 // delaying the launch might worry investors
+          effect: -1 // might worry investors due to potential escalation
         },
         {
           pillerName: PillerType.COMPETITOR,
-          effect: -1 // delay might give competitors an advantage
+          effect: -1 // retaliation might escalate the situation with competitors
         }
       ],
       RejectEffects: [
         {
           pillerName: PillerType.CUSTOMER,
-          effect: -4 // launching a flawed product can harm customer satisfaction
+          effect: -2 // ignoring the campaign might lead to loss of customer trust
         },
         {
           pillerName: PillerType.COMPETITOR,
-          effect: 1 // speedy launch might outpace competitors, but at a risk
+          effect: 1 // staying above the fray might be seen as a positive trait
         }
       ]
-    },
+    }
   ]
 };
