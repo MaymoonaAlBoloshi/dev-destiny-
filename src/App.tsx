@@ -6,7 +6,6 @@ function App() {
   const handleMouseEnter = (isRight: boolean) => {
     if (cardRef.current) {
       cardRef.current.style.transform = isRight ? 'rotate(25deg)' : 'rotate(-25deg)';
-      // add a shadow on card #991b1b or #065f46
       cardRef.current.style.boxShadow = isRight ? '0 0 40px #059669' : '0 0 40px #991b1b';
     }
   };
@@ -50,7 +49,7 @@ function App() {
         <button onMouseEnter={() => handleMouseEnter(false)}
           onClick={handleClick}
           onMouseLeave={handleMouseLeave}
-          className="border-2 border-rose-600 px-2 text-rose-300 h-8">
+          className="border-2 border-rose-600 px-2 text-rose-300 py-1 hover:px-3 duration-700 hover:py-2">
           decline
         </button>
         <div ref={cardRef} className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-yellow-50 transition-all duration-700">
@@ -66,11 +65,11 @@ function App() {
         <button onMouseEnter={() => handleMouseEnter(true)}
           onClick={handleClick}
           onMouseLeave={handleMouseLeave}
-          className="border-2 border-emerald-600 px-2 text-emerald-300 h-8 ">
+          className="border-2 border-emerald-600 px-2 text-emerald-300  py-1 hover:px-3 duration-700 hover:py-2">
           Accept
         </button>
       </main>
-    </div>
+    </div >
   )
 }
 
