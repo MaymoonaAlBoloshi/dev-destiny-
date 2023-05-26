@@ -74,3 +74,6 @@ function App() {
 }
 
 export default App
+//TODO: add pillers object
+//TODO: add audio button with icon
+//TODO: add character events
