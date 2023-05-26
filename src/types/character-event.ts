@@ -1,8 +1,9 @@
 import { CharacterType } from './character'
 import { PillerType } from './pillers'
 
-export type CaacterEvent = {
+export type CharacterEvent = {
   character: keyof typeof CharacterType;
+  color: 'yellow' | 'rose' | 'emerald' | 'violet';
   events: Event[];
 };
 

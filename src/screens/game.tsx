@@ -19,6 +19,11 @@ function Game() {
 
   const [eventList, setEventList] = useState<CharacterEvent>(CTOEvents)
 
+  const getRandomCharacter = () => {
+    const random = Math.floor(Math.random() * 2) + 1
+    setRandomCharacter(random)
+  }
+
   const randEventListSelector = () => {
     switch (randomCharacter) {
       case 1:
@@ -55,6 +60,23 @@ function Game() {
     }
   }
 
+  const handleGameOver = () => {
+    console.log('game over')
+  }
+
+  const handlConcequeses = () => {
+    // if score is 0 or less game over
+    employeesScore <= 0 && handleGameOver()
+    customersScore <= 0 && handleGameOver()
+    investorsScore <= 0 && handleGameOver()
+    competetorsScore <= 0 && handleGameOver()
+    // if score is 100 or more game over
+    employeesScore >= 100 && handleGameOver()
+    customersScore >= 100 && handleGameOver()
+    investorsScore >= 100 && handleGameOver()
+    competetorsScore >= 100 && handleGameOver()
+
+  }
   const pillerScoreUpate = (score: number, pillerName: PillerType) => {
     switch (pillerName) {
       case PillerType.EMPLOYEE:
@@ -80,7 +102,11 @@ function Game() {
     effects.forEach((effect) => {
       pillerScoreUpate(effect.effect, effect.pillerName as PillerType)
     })
-    return true
+   // disable button events 
+    
+    setTimeout(() => {
+      getRandomCharacter()
+    }, 1000)
   }
 
   const hadleDecline = () => {
@@ -89,12 +115,14 @@ function Game() {
     effects.forEach((effect) => {
       pillerScoreUpate(effect.effect, effect.pillerName as PillerType)
     })
-    return true
+
+    setTimeout(() => {
+      getRandomCharacter()
+    }, 1000)
   }
 
   useEffect(() => {
-    const random = Math.floor(Math.random() * 2) + 1
-    setRandomCharacter(random)
+    getRandomCharacter()
   }, [])
 
   useEffect(() => {
@@ -107,6 +135,10 @@ function Game() {
       setRandomEvent(eventList.events[rand])
     }
   }, [eventList])
+
+  useEffect(() => {
+    handlConcequeses()
+  }, [employeesScore, customersScore, investorsScore, competetorsScore])
 
 
   return (

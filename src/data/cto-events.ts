@@ -4,6 +4,7 @@ import { PillerType } from "../types/pillers";
 
 export const CTOEvents: CharacterEvent = {
   character: CharacterType.CTO,
+  color: "emerald",
   events: [
     {
       id: 1,
