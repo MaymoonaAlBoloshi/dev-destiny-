@@ -1,8 +1,10 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Piller } from '../components/piller'
-// rename file to cmo-events
-import { } from '../data/cto-events'
+import { CMOEvents } from '../data/cmo-events'
 import { CTOEvents } from '../data/cto-events'
+import { CharacterEvent } from '../types/character-event.ts'
+
+const eventsLength = (eventList: any) => eventList.events.length
 
 function Game() {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -10,6 +12,23 @@ function Game() {
   const [customersScore, setCustomersScore] = useState(50)
   const [investorsScore, setInvestorsScore] = useState(50)
   const [competetorsScore, setCompetetorsScore] = useState(50)
+  const [randomCharacter, setRandomCharacter] = useState(1)
+  const [randomEvent, setRandomEvent] = useState(0)
+
+  const [eventList, setEventList] = useState<CharacterEvent>(CTOEvents)
+
+  const randEventListSelector = () => {
+    switch (randomCharacter) {
+      case 1:
+        setEventList(CMOEvents)
+        break;
+      case 2:
+        setEventList(CTOEvents)
+        break;
+      default:
+        break;
+    }
+  }
 
   const handleMouseEnter = (isRight: boolean) => {
     if (cardRef.current) {
@@ -32,7 +51,30 @@ function Game() {
       cardRef.current.style.opacity = '0.2';
       cardRef.current.style.transform = 'scale(0.8)';
     }
+    // generate radome event
   }
+  useEffect(() => {
+    const random = Math.floor(Math.random() * 2) + 1
+    setRandomCharacter(random)
+  }, [])
+
+  useEffect(() => {
+    randEventListSelector()
+  }, [randomCharacter])
+
+  useEffect(() => {
+    if (eventList) {
+      const rand = Math.floor(Math.random() * eventsLength(eventList)) + 1
+      setRandomEvent(rand)
+    }
+  }, [eventList])
+
+
+
+
+  randomEvent && console.log(eventList.events[randomEvent])
+
+  if (!eventList) return <div> event not found </div>
   return (
     <div className="flex flex-col w-screen h-screen">
       <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
@@ -49,13 +91,12 @@ function Game() {
           decline
         </button>
         <div ref={cardRef} className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-yellow-50 transition-all duration-700">
-          <p className="text-yellow-200 w-full p-4 text-center">Character</p>
+          <p className="text-yellow-200 w-full p-4 text-center">{eventList.character}</p>
           <img className="w-36" src="https://via.placeholder.com/64" alt="character" />
-          <p className="italic text-sm text-center text-yellow-50">
-            <span className="text-yellow-200 text-2xl">"</span>
-            lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            <span className="text-yellow-200 text-2xl m-b-2">"</span>
+          <p className="italic text-sm text-center text-yellow-50 px-2">
+            <span className="text-yellow-200 text-2xl abosolute">"</span>
+            {randomEvent && eventList.events[randomEvent].event}
+            <span className="text-yellow-200 text-2xl m-b-2 abosolute">"</span>
           </p>
         </div>
         <button onMouseEnter={() => handleMouseEnter(true)}
@@ -72,3 +113,5 @@ function Game() {
 export default Game
 //TODO: add audio button with icon
 //TODO: add character events
+//TODO: add character images
+//TODO: add character color
