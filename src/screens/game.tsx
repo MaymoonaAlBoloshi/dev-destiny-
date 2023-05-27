@@ -153,10 +153,10 @@ function Game() {
   return (
     <div className="flex flex-col w-screen h-screen">
       <header className=" flex justify-between px-44 basis-1/12 bg-black text-white text-md p-4">
-        <Piller color="emerald" score={employeesScore} />
-        <Piller color="rose" score={investorsScore} />
-        <Piller color="yellow" score={competetorsScore} />
-        <Piller color="violet" score={customersScore} />
+        <Piller color="emerald" score={employeesScore} piller='EMPLOYEE' />
+        <Piller color="rose" score={investorsScore} piller='INVESTOR' />
+        <Piller color="yellow" score={competetorsScore} piller='COMPETITOR' />
+        <Piller color="violet" score={customersScore} piller='CUSTOMER' />
       </header>
       <main className="flex justify-center items-center gap-12 basis-11/12 bg-black text-md text-white p-4">
         <button onMouseEnter={() => handleMouseEnter(false)}
