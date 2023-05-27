@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Piller } from '../components/piller'
 import { CMOEvents } from '../data/cmo-events'
 import { CTOEvents } from '../data/cto-events'
+import { characters } from '../data/characters.ts'
 import { CharacterEvent, Event } from '../types/character-event.ts'
 import { PillerType } from '../types/pillers.ts'
 
@@ -14,10 +15,10 @@ function Game() {
   const [customersScore, setCustomersScore] = useState(50)
   const [investorsScore, setInvestorsScore] = useState(50)
   const [competetorsScore, setCompetetorsScore] = useState(50)
-  const [randomCharacter, setRandomCharacter] = useState(1)
+  const [randomCharacter, setRandomCharacter] = useState(1) // instead of number lets have the character object
   const [randomEvent, setRandomEvent] = useState<Event>()
-
   const [eventList, setEventList] = useState<CharacterEvent>(CTOEvents)
+  const [characterImage, setCharacterImage] = useState<string>('')
 
   const getRandomCharacter = () => {
     const random = Math.floor(Math.random() * 2) + 1
@@ -41,6 +42,10 @@ function Game() {
     if (cardRef.current) {
       cardRef.current.style.transform = isRight ? 'rotate(25deg)' : 'rotate(-25deg)';
       cardRef.current.style.boxShadow = isRight ? '0 0 40px #059669' : '0 0 40px #991b1b';
+
+      const charImage = isRight ? characters.find((char) => char.shortName === eventList.character)?.imagePositive
+        : characters.find((char) => char.shortName === eventList.character)?.imageNegative
+      setCharacterImage(charImage || '')
     }
   };
 
@@ -49,6 +54,8 @@ function Game() {
       cardRef.current.style.transform = 'rotate(0deg)';
       cardRef.current.style.boxShadow = 'none';
       cardRef.current.style.opacity = '1';
+      const charImage = characters.find((char) => char.shortName === eventList.character)?.imageUrl
+      setCharacterImage(charImage || '')
     }
   };
 
@@ -102,8 +109,8 @@ function Game() {
     effects.forEach((effect) => {
       pillerScoreUpate(effect.effect, effect.pillerName as PillerType)
     })
-   // disable button events 
-    
+    // disable button events 
+
     setTimeout(() => {
       getRandomCharacter()
     }, 1000)
@@ -132,6 +139,8 @@ function Game() {
   useEffect(() => {
     if (eventList) {
       const rand = Math.floor(Math.random() * eventsLength(eventList))
+      const charImage: string = characters.find((char) => char.shortName === eventList.character)?.imageUrl || 'https://imgur.com/LOXE3XD'
+      setCharacterImage(charImage)
       setRandomEvent(eventList.events[rand])
     }
   }, [eventList])
@@ -156,9 +165,9 @@ function Game() {
           className="border-2 border-rose-600 px-2 text-rose-300 py-1 hover:px-3 duration-700 hover:py-2">
           decline
         </button>
-        <div ref={cardRef} className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-yellow-50 transition-all duration-700">
+        <div ref={cardRef} className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-yellow-50 transition-all duration-700 rounded-xl">
           <p className="text-yellow-200 w-full p-4 text-center">{eventList.character}</p>
-          <img className="w-36" src="https://via.placeholder.com/64" alt="character" />
+          <img id="char-image" className="w-36 rounded" src={characterImage} alt="character" />
           <p className="italic text-sm text-center text-yellow-50 px-2">
             <span className="text-yellow-200 text-2xl abosolute">"</span>
             {randomEvent && randomEvent.event}
