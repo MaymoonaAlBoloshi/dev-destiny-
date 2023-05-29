@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Piller } from '../components/piller'
+import { ChoiceCard } from '../components/choiceCard.tsx'
+
 import { CMOEvents } from '../data/cmo-events'
 import { CTOEvents } from '../data/cto-events'
 import { characters } from '../data/characters.ts'
@@ -128,6 +130,14 @@ function Game() {
     }, 1000)
   }
 
+  const handleCardDrage = (event: React.DragEvent<HTMLDivElement>) => {
+    if (event.clientX > event.screenX) {
+      console.log('right')
+    } else {
+      console.log('left')
+    }
+  }
+
   useEffect(() => {
     getRandomCharacter()
   }, [])
@@ -165,15 +175,15 @@ function Game() {
           className="border-2 border-rose-600 px-2 text-rose-300 py-1 hover:px-3 duration-700 hover:py-2">
           decline
         </button>
-        <div ref={cardRef} className="flex flex-col items-center gap-2 flex-row w-64 h-96 border-2 border-yellow-50 transition-all duration-700 rounded-xl">
-          <p className="text-yellow-200 w-full p-4 text-center">{eventList.character}</p>
-          <img id="char-image" className="w-36 rounded" src={characterImage} alt="character" />
-          <p className="italic text-sm text-center text-yellow-50 px-2">
-            <span className="text-yellow-200 text-2xl abosolute">"</span>
-            {randomEvent && randomEvent.event}
-            <span className="text-yellow-200 text-2xl m-b-2 abosolute">"</span>
-          </p>
-        </div>
+        <ChoiceCard
+          cardRef={cardRef}
+          event={randomEvent as Event}
+          eventList={eventList}
+          characterImage={characterImage}
+          handleCardDrage={handleCardDrage}
+          animateCard={handleMouseEnter}
+          clearCardAnimation={handleMouseLeave}
+        />
         <button onMouseEnter={() => handleMouseEnter(true)}
           onClick={handleAccept}
           onMouseLeave={handleMouseLeave}
