@@ -38,9 +38,9 @@ export const characters: Character[] = [
     description:
       'This character can bring up issues related to employee satisfaction, hiring, and company culture.',
     shortName: CharacterType.HR,
-    imageUrl: '/characters/investor-n.jpg',
-    imageNegative: '/characters/investor-a.jpg',
-    imagePositive: '/characters/investor-h.jpg',
+    imageUrl: '/characters/hr-n.jpg',
+    imageNegative: '/characters/hr-a.jpg',
+    imagePositive: '/characters/hr-h.jpg',
   },
   {
     id: 5,
