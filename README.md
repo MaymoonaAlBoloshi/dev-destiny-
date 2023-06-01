@@ -1,4 +1,5 @@
 As a CEO of a booming company in software, your goal is to help the company rise and prevent it's fall
+![image](https://github.com/MaymoonaAlBoloshi/dev-destiny-/assets/43531753/caaee172-45b1-4a47-a3ad-e1a2c1404deb)
 
 ## progress
 - 2/7 images added
