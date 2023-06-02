@@ -1,20 +1,6 @@
 import { CharacterEvent } from "../types/character-event";
 import { CharacterType } from "../types/character";
 
-// export type CharacterEvent = {
-//   characterId: number;
-//   events: {
-//     id: number;
-//     event: string;
-//     AcceptEffects: Effects[];
-//     RejectEffects: Effects[];
-//   }
-// };
-
-// type Effects = {
-//   pillerId: number;
-//   effect: number; // postive or negative number
-// };
 const employeeEvents: CharacterEvent[] = [
   {
     characterId: 1,
@@ -24,7 +10,7 @@ const employeeEvents: CharacterEvent[] = [
         event: "The team is working late hours regularly. Should we hire more staff?",
         AcceptEffects: [
           {
-            
+
             pillerName: "Employees",
             effect: 3 // hiring more staff increases employee satisfaction
           },
@@ -45,3 +31,4 @@ const employeeEvents: CharacterEvent[] = [
         ]
       },
     ]
+  }

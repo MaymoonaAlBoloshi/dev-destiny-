@@ -197,6 +197,7 @@ function Game() {
 
 export default Game
 //TODO: add audio button with icon
-//TODO: add character events
-//TODO: add character images
+//TODO: add initial menu screen
+//TODO: add character events 4/7
+//TODO: add character images 2/7
 //TODO: add character color
