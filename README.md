@@ -5,7 +5,7 @@ As a CEO of a booming company in software, your goal is to help the company rise
 - 2/7 images added
 - 4/7 base events added
 - 2/7 event integrated
-- redo competition events, they make sure they match the character description// do for other characters as well
+- redo competition events, then make sure they match the character description// do for other characters as well
 - menu screen > not implemented
 - game over screen > not implemented
 
